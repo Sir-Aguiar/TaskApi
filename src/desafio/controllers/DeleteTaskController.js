@@ -2,8 +2,11 @@ const Task = require("../../../database/models/Task")
 
 
 module.exports = async (req, res) => {
+  const { user_id, task_id } = req.params
   try {
-    const { user_id, task_id } = req.params
+    if (!user_id || !task_id) {
+      throw new Error("Insira dados válidos!")
+    }
     await Task.destroy({
       where: {
         user_id: Number(user_id),
@@ -12,6 +15,6 @@ module.exports = async (req, res) => {
     })
     res.status(200).json({ error: null })
   } catch (error) {
-    res.status(500).json({ error: error })
+    res.status(500).json({ error: error.message })
   }
 }
