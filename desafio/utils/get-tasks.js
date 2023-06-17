@@ -1,5 +1,5 @@
-const Task = require("../../../database/models/Task");
-const User = require("../../../database/models/Users");
+const Task = require("../database/models/Task");
+const User = require("../database/models/Users");
 
 const getLastTaskId = async () => {
   const allTasks = await Task.findAll();

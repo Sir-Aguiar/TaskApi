@@ -1,18 +1,21 @@
-const Task = require("../../../database/models/Task");
-const { getLastTaskId } = require("../utils/get-tasks");
+const Task = require("../database/models/Task");
 module.exports = async (req, res) => {
-  const { user_id } = req.params;
+  let { user_id } = req.params;
   const { name, description } = req.body;
-
+  user_id = Number(user_id);
   try {
     if (!name || !description) {
-      throw new Error("Insira dados válidos!");
+      throw new Error("Não foram fornecidos dados suficientes");
     }
+    if (typeof name != "string" || typeof description != "string") {
+      throw new Error("Os dados inseridos são inválidos");
+    }
+
     const createdTask = await Task.create({
       name,
       description,
-      user_id: Number(user_id),
-      id: (await getLastTaskId()) + 1,
+      user_id,
+      id,
     });
 
     res.status(201).json({ error: null, createdTask });

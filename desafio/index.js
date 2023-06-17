@@ -8,18 +8,9 @@ const UpdateTaskController = require("./controllers/UpdateTaskController");
 const app = express();
 app.use(express.json());
 
-/* 
-  - Criar usuário /user (feito)
-
-  - Criar tarefa /task (feito)
-  - Atualizar tarefa /task
-  - Deletar tarefa /task (feito)
-  - Listar tarefas /task (feito)
-
-*/
-
 app.post("/user", CreateUserController);
 app.post("/task/:user_id", CreateTaskController);
+
 app.delete("/task/:user_id/:task_id", DeleteTaskController);
 
 app.get("/tasks/:user_id", GetTasksController);

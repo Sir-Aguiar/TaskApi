@@ -1,11 +1,16 @@
-const User = require("../../../database/models/Users");
+const User = require("../database/models/Users");
 module.exports = async (req, res) => {
   const { name, email } = req.body;
   try {
-    if (!name || !email || !email.includes("@")) {
-      throw new Error("Insira dados válidos");
+    if (!name || !email) {
+      throw new Error("Não foram inseridos dados suficientes");
     }
+    if (typeof name != "string" || typeof email != "string" || !email.includes("@")) {
+      throw new Error("Os dados inseridos são inválidos");
+    }
+
     const createdUser = await User.create({ name, email }, { logging: false });
+    
     res.status(201).json({ error: null, createdUser });
   } catch (error) {
     if (error.name == "SequelizeUniqueConstraintError") {
