@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
     }
 
     const createdUser = await User.create({ name, email }, { logging: false });
-    
+
     res.status(201).json({ error: null, createdUser });
   } catch (error) {
     if (error.name == "SequelizeUniqueConstraintError") {

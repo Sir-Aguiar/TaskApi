@@ -7,15 +7,14 @@ module.exports = async (req, res) => {
   const incomingData = { name, description };
   const upateObject = {};
 
-  user_id = Number(user_id);
-  id = Number(id);
   try {
-    if (!user_id || !task_id) {
+    if (!user_id || !id) {
       throw new Error("Não foram inseridos dados suficientes");
     }
-
+    user_id = Number(user_id);
+    id = Number(id);
     for (const key in incomingData) {
-      if (typeof incomingData[key] !== "string") {
+      if (typeof incomingData[key] !== "string" && typeof incomingData[key] !== "undefined") {
         throw new Error("Os dados inseridos são inválidos");
       }
       if (typeof incomingData[key] !== "undefined") {
