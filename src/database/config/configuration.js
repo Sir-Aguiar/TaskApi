@@ -9,5 +9,4 @@ module.exports = {
   username: process.env.USER_NAME,
   dialect: 'postgres',
   logging: false,
-
 }

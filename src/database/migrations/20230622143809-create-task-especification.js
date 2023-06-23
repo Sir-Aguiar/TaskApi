@@ -1,28 +1,31 @@
-'use strict';
+"use strict";
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('taskEspecifications', {
+    await queryInterface.createTable("taskEspecifications", {
       taskId: {
-        type: Sequelize.INTEGER, primaryKey: true, references: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        references: {
           model: "tasks",
-          key: "id"
-        }
+          key: "id",
+        },
+        onDelete: "CASCADE",
       },
       especification: { type: Sequelize.TEXT, allowNull: false },
       createdAt: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
       },
       updatedAt: {
         type: Sequelize.DATE,
-        allowNull: false
-      }
+        allowNull: false,
+      },
     });
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('taskEspecifications');
-  }
+    await queryInterface.dropTable("taskEspecifications");
+  },
 };

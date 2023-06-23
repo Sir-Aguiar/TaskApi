@@ -1,28 +1,29 @@
-const { DataTypes } = require("sequelize")
-const database = require("../database")
+const { DataTypes } = require("sequelize");
+const database = require("../database");
 
-const TaskUser = database.define("User", {
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true
+const TaskUser = database.define(
+  "User",
+  {
+    userId: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      references: {
+        model: "users",
+        key: "id",
+      },
+    },
+    taskId: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      references: {
+        model: "tasks",
+        key: "id",
+      },
+    },
   },
-  user_id: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: "users",
-      key: "id"
-    }
+  {
+    tableName: "taskUser",
   },
-  task_id: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: "tasks",
-      key: "id"
-    }
-  },
-}, {
-  tableName: "taskUser"
-})
+);
 
-module.exports = TaskUser
+module.exports = TaskUser;
